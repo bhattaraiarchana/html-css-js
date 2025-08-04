@@ -2,9 +2,7 @@
 
 
 
-This is a front-end project built with HTML, CSS, and JavaScript.  
-
-It showcases the basics of structure, styling, and interactivity using vanilla technologies.
+This is a front-end project built with HTML, CSS, and JavaScript. 
 
 
 
@@ -38,7 +36,7 @@ To view the project:
 
 ```bash
 
-git clone https://github.com/your-username/html-css-js.git
+git clone https://github.com/bhattaraiarchana/html-css-js.git
 
 
 
