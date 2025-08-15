@@ -1,71 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="A blog about my web development journey.">
-  <meta name="author" content="Archana Bhattarai">
-  <meta name="keywords" content="HTML, CSS, Developer, Blog">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A blog about my web development journey." />
+  <meta name="author" content="Archana Bhattarai" />
+  <meta name="keywords" content="HTML, CSS, Developer, Blog" />
+
+  <!-- Canonical & base -->
+  <link rel="canonical" href="https://example.com/dev-blog" />
+  <base href="https://example.com/" />
+
+  <!-- Icons & RSS -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="alternate" type="application/rss+xml" title="Dev Blog RSS" href="/feed.xml" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Dev Blog" />
+  <meta property="og:description" content="Follow my journey learning frontend development." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/dev-blog" />
+  <meta property="og:image" content="https://example.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dev Blog" />
+  <meta name="twitter:description" content="Follow my journey learning frontend development." />
+  <meta name="twitter:image" content="https://example.com/og-image.jpg" />
 
   <title>Dev Blog</title>
+
+  <!-- Structured data (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Dev Blog",
+    "url": "https://example.com/dev-blog",
+    "author": {
+      "@type": "Person",
+      "name": "Archana Bhattarai"
+    },
+    "about": "A blog documenting a frontend learning journey"
+  }
+  </script>
 </head>
 <body>
+  <noscript>
+    <p><strong>Heads up:</strong> Some interactive bits (like the comments form helper output) work best with JavaScript enabled.</p>
+  </noscript>
 
-  <!-- Profile Sidebar or Intro -->
-  <!--<aside class="profile-card">
-    <header>
-      <img src="avatar.jpg" alt="Profile photo">
-      <h2>Jane Developer</h2>
-      <p>Frontend Wizard 🧙‍♀️</p>
-    </header>
-  </aside> -->
+  <!-- Skip navigation for screen readers/keyboard users -->
+  <a href="#main-content" class="visually-hidden">Skip to main content</a>
 
-  <!-- Main Blog Header -->
-  <header>
+  <!-- Site Header -->
+  <header role="banner">
     <h1>👨‍💻 My Developer Blog</h1>
-    <nav>
+
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li aria-current="page">My Developer Blog</li>
+      </ol>
+    </nav>
+
+    <!-- Primary Nav -->
+    <nav aria-label="Primary">
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Posts</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#posts">Posts</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <form action="/search" method="get" role="search" aria-label="Site search">
+            <label for="q">Search:</label>
+            <input id="q" name="q" type="search" placeholder="Search posts…" />
+            <button type="submit">Go</button>
+          </form>
+        </li>
       </ul>
     </nav>
   </header>
 
-  <!-- Main Blog Content -->
-  <main>
-    <article>
-        <section id="about-me">
-  <h2>👨‍🎨 About the Developer</h2>
-  <figure>
-    <img src="your-photo.jpg" alt="Photo of Me" width="150">
-    <figcaption>Yes, that’s me, coding with coffee ☕</figcaption>
-  </figure>
-  <p>I'm a passionate frontend learner with big dreams! 💻🔥</p>
-</section>
+  <!-- Sidebar / Profile -->
+  <aside aria-labelledby="profile-heading">
+    <h2 id="profile-heading">About the Author</h2>
+    <figure>
+      <!-- Responsive image with <picture> -->
+      <picture>
+        <source srcset="/images/archana@2x.webp 2x, /images/archana.webp 1x" type="image/webp" />
+        <source srcset="/images/archana@2x.jpg 2x, /images/archana.jpg 1x" type="image/jpeg" />
+        <img src="/images/archana.jpg" alt="Portrait of Archana Bhattarai smiling at a laptop" width="180" height="180" />
+      </picture>
+      <figcaption>Yes, that’s me, coding with coffee ☕</figcaption>
+    </figure>
 
-      <h2>How I Built My First Website</h2>
-      <p>It all started with a single <code>&lt;div&gt;</code>.</p>
+    <p>Hi! I’m <strong>Archana</strong>, a frontend learner from <abbr title="Kathmandu, Nepal">KTM</abbr> with big dreams! 💻🔥</p>
 
-      <section>
-        <h3>🔧 The Tools I Used</h3>
+    <section aria-labelledby="status-heading">
+      <h3 id="status-heading">Learning Status</h3>
+      <p>
+        HTML mastery:
+        <meter min="0" max="100" value="80" optimum="100">80%</meter>
+      </p>
+      <p>
+        Current project build:
+        <progress value="45" max="100">45%</progress>
+      </p>
+      <p>Next milestone by <time datetime="2025-09-15">September 15, 2025</time>.</p>
+    </section>
+
+    <section aria-labelledby="links-heading">
+      <h3 id="links-heading">Elsewhere</h3>
+      <ul>
+        <li><a href="https://github.com/username">GitHub</a></li>
+        <li><a href="https://twitter.com/username">Twitter</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </section>
+  </aside>
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    <article aria-labelledby="post-title" itemscope itemtype="https://schema.org/BlogPosting">
+      <header>
+        <h2 id="post-title" itemprop="headline">How I Built My First Website</h2>
+        <p>
+          <small>Published on <time datetime="2025-08-01" itemprop="datePublished">August 1, 2025</time> •
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            by <span itemprop="name">Archana Bhattarai</span>
+          </span></small>
+        </p>
+      </header>
+
+      <!-- About Me section you had -->
+      <section id="about-me" aria-labelledby="about-heading">
+        <h3 id="about-heading">👨‍🎨 About the Developer</h3>
+        <figure>
+          <img src="your-photo.jpg" alt="Photo of me coding" width="150" />
+          <figcaption>Yes, that’s me, coding with coffee ☕</figcaption>
+        </figure>
+        <p>I'm a passionate frontend learner with big dreams! 💻🔥</p>
+      </section>
+
+      <section aria-labelledby="start-heading">
+        <h3 id="start-heading">It all started with a single <code>&lt;div&gt;</code></h3>
+        <p>Then I learned why <em>semantics</em> matter more than just <strong>making it work</strong>.</p>
+        <blockquote cite="https://developer.mozilla.org/en-US/docs/Glossary/Semantics">
+          “Semantics is about using the right elements for the right job.” <cite>— MDN</cite>
+        </blockquote>
+        <p>Here’s a tiny snippet I loved:</p>
+        <pre><code>&lt;header&gt;
+  &lt;h1&gt;My Site&lt;/h1&gt;
+  &lt;nav aria-label="Primary"&gt;...&lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+        <p>Keyboard tip: press <kbd>Tab</kbd> to focus links, <kbd>Enter</kbd> to activate. Sample output often looks like <samp>Build succeeded</samp>.</p>
+      </section>
+
+      <section aria-labelledby="tools-heading">
+        <h3 id="tools-heading">🔧 The Tools I Used</h3>
         <ul>
           <li>HTML</li>
           <li>CSS</li>
           <li>VS Code</li>
         </ul>
+
+        <h4>A simple glossary</h4>
+        <dl>
+          <dt><abbr title="HyperText Markup Language">HTML</abbr></dt>
+          <dd>The structure and semantics of the web.</dd>
+          <dt>CSS</dt>
+          <dd>Presentation and layout.</dd>
+          <dt>ARIA</dt>
+          <dd>Accessibility semantics to assistive tech.</dd>
+        </dl>
       </section>
 
-      <section>
-        <h3>💡 What I Learned</h3>
-        <p>Code gets better when you write it with love 💖 and tabs 😄.</p>
+      <section aria-labelledby="learned-heading">
+        <h3 id="learned-heading">💡 What I Learned</h3>
+        <p>Code gets better when you write it with love 💖 and tabs 😄. I also learned the difference between <mark>content</mark> and <del>pure decoration</del><ins>meaningful structure</ins>.</p>
+        <p>Water boils at 100<sup>°</sup>C at sea level; chemical water is H<sub>2</sub>O.</p>
       </section>
+
+      <section aria-labelledby="media-heading">
+        <h3 id="media-heading">🎬 Media I Embedded</h3>
+        <figure>
+          <video controls width="560" poster="/images/video-poster.jpg">
+            <source src="/media/intro.mp4" type="video/mp4" />
+            <track kind="captions" src="/media/intro.vtt" srclang="en" label="English captions" />
+            Sorry, your browser doesn’t support embedded videos.
+          </video>
+          <figcaption>My quick intro video.</figcaption>
+        </figure>
+
+        <figure>
+          <audio controls>
+            <source src="/media/lofi.ogg" type="audio/ogg" />
+            <source src="/media/lofi.mp3" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <figcaption>Lo‑fi beats for coding.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="schedule-heading">
+        <h3 id="schedule-heading">🗓️ Study Schedule</h3>
+        <table>
+          <caption>My weekly learning plan</caption>
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Topic</th>
+              <th scope="col">Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Mon</th>
+              <td>HTML semantics</td>
+              <td><data value="2">2</data></td>
+            </tr>
+            <tr>
+              <th scope="row">Wed</th>
+              <td>CSS layout</td>
+              <td><data value="3">3</data></td>
+            </tr>
+            <tr>
+              <th scope="row">Fri</th>
+              <td>Accessibility</td>
+              <td><data value="2">2</data></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row" colspan="2">Total</th>
+              <td>7</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <section aria-labelledby="faq-heading">
+        <h3 id="faq-heading">❓ FAQ</h3>
+        <details>
+          <summary>How do you stay motivated?</summary>
+          <p>I celebrate small wins and keep a log of progress each week.</p>
+        </details>
+        <details>
+          <summary>Tabs or spaces?</summary>
+          <p>Use what your team uses; consistency beats preference.</p>
+        </details>
+      </section>
+
+      <footer>
+        <p>Tagged: <a href="/tags/html">HTML</a>, <a href="/tags/accessibility">Accessibility</a></p>
+      </footer>
     </article>
+
+    <!-- Posts list section to demonstrate lists, time, and pagination -->
+    <section id="posts" aria-labelledby="posts-heading">
+      <h2 id="posts-heading">More Posts</h2>
+      <ul>
+        <li><a href="/posts/why-semantic-html">Why Semantic HTML Matters</a> — <time datetime="2025-07-20">July 20, 2025</time></li>
+        <li><a href="/posts/css-grid-cheatsheet">My CSS Grid Cheatsheet</a> — <time datetime="2025-06-30">June 30, 2025</time></li>
+        <li><a href="/posts/keyboard-a11y">Keyboard Accessibility 101</a> — <time datetime="2025-06-10">June 10, 2025</time></li>
+      </ul>
+
+      <nav aria-label="Pagination">
+        <ul>
+          <li><a href="/blog/page/1" rel="prev">Previous</a></li>
+          <li><a href="/blog/page/2" aria-current="page">2</a></li>
+          <li><a href="/blog/page/3" rel="next">Next</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <!-- Comments (basic form elements) -->
+    <section aria-labelledby="comments-heading">
+      <h2 id="comments-heading">Comments</h2>
+      <ol>
+        <li>
+          <article aria-labelledby="c1">
+            <h3 id="c1">Great start!</h3>
+            <p><small>by <bdi>Sam</bdi> on <time datetime="2025-08-05">Aug 5, 2025</time></small></p>
+            <p>Loved the glossary. Keep going!</p>
+          </article>
+        </li>
+      </ol>
+
+      <form action="/comments" method="post">
+        <fieldset>
+          <legend>Leave a comment</legend>
+
+          <p>
+            <label for="name">Name</label><br />
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </p>
+
+          <p>
+            <label for="email">Email</label><br />
+            <input id="email" name="email" type="email" required autocomplete="email" />
+            <small>We’ll never share your email.</small>
+          </p>
+
+          <p>
+            <label for="website">Website (optional)</label><br />
+            <input id="website" name="website" type="url" placeholder="https://example.com" />
+          </p>
+
+          <p>
+            <label for="comment">Comment</label><br />
+            <textarea id="comment" name="comment" rows="6" required></textarea>
+          </p>
+
+          <p>
+            <label for="mood">Mood</label><br />
+            <select id="mood" name="mood">
+              <option value="cheerful">Cheerful</option>
+              <option value="curious">Curious</option>
+              <option value="helpful">Helpful</option>
+            </select>
+          </p>
+
+          <p>
+            <label for="topic">Topic</label><br />
+            <input id="topic" name="topic" list="topics" placeholder="Pick or type…" />
+            <datalist id="topics">
+              <option value="HTML" />
+              <option value="CSS" />
+              <option value="Accessibility" />
+            </datalist>
+          </p>
+
+          <p>
+            <button type="submit">Post Comment</button>
+            <button type="reset">Reset</button>
+            <!-- Example output element for JS-enhanced forms -->
+            <output name="helper" for="comment"></output>
+          </p>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Get in touch</h2>
+      <address>
+        Email me at
+        <a href="mailto:arcbbhattarai11@gmail.com">arcbbhattarai11@gmail.com</a><br />
+        or find me on <a href="https://github.com/username">GitHub</a>.
+      </address>
+
+      <form action="/contact" method="post">
+        <fieldset>
+          <legend>Contact Form</legend>
+
+          <p>
+            <label for="subject">Subject</label><br />
+            <input id="subject" name="subject" type="text" required />
+          </p>
+
+          <p>
+            <label for="message">Message</label><br />
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </p>
+
+          <p>
+            <label>
+              <input type="checkbox" name="subscribe" value="yes" />
+              Subscribe to newsletter
+            </label>
+          </p>
+
+          <p>
+            Preferred contact date:
+            <input type="date" name="contact_date" />
+          </p>
+
+          <p>
+            <button type="submit">Send</button>
+          </p>
+        </fieldset>
+      </form>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Dev Learner <br> <a href="mailto:arcbbhattarai11@gmail.com">Contact Me</a></p>
+  <!-- Site Footer -->
+  <footer role="contentinfo">
+    <section aria-labelledby="site-footer-links">
+      <h2 id="site-footer-links" class="visually-hidden">Footer Links</h2>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/sitemap">Sitemap</a></li>
+        </ul>
+      </nav>
+    </section>
+
+    <p>&copy; <time datetime="2025">2025</time> Dev Learner — <a href="mailto:arcbbhattarai11@gmail.com">Contact Me</a></p>
+    <p><small>Crafted with <span aria-label="love">❤️</span> and semantic HTML.</small></p>
   </footer>
+
 
 </body>
 </html>
